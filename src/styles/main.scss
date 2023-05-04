@@ -1,0 +1,89 @@
+@import '_variables';
+@import '_mixins';
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  position: relative;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh + 10rem);
+}
+
+.AppBody {
+  flex: 1;
+}
+
+* {
+  font-family: $font-secondary;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-primary;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 20px;
+
+  @include screen(desktop) {
+    max-width: 1200px;
+  }
+}
+
+.title {
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: 400;
+  color: $color-dark;
+  text-align: center;
+  width: max-content;
+  margin: 0 auto;
+  position: relative;
+  text-transform: uppercase;
+
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 4px;
+    background-color: $color-primary;
+    position: absolute;
+    top: calc(50% - 4px);
+  }
+
+  &::before {
+    left: -42px;
+  }
+
+  &::after {
+    right: -42px;
+  }
+}
+
+//Animações
+.animeLeft {
+  animation: animeLeft 400ms ease-out;
+}
+
+@keyframes animeLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
