@@ -1,0 +1,18 @@
+@import './mixins';
+@import './variables';
+
+.dark {
+  .header {
+    background-color: $color-secondary;
+  }
+
+  .theme-changer {
+    svg {
+      fill: $white;
+
+      &:hover {
+        fill: $color-grey-light;
+      }
+    }
+  }
+}
