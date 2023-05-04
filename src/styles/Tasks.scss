@@ -1,0 +1,146 @@
+@import './mixins';
+@import './variables';
+
+.tasks {
+  background-color: $white;
+  width: 90%;
+  max-width: 600px;
+  height: max-content;
+  padding: 1.5rem;
+  border-radius: $border-radius;
+  box-shadow: $shadow;
+  color: $color-dark;
+
+  h2 {
+    font-weight: 400;
+    font-size: 2.25rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid $color-grey-light;
+  }
+}
+
+.tasks__content {
+  h3 {
+    padding-top: 1.5rem;
+    font-weight: 400;
+    font-size: 1.125rem;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0 0 0;
+    display: grid;
+    gap: 1rem;
+  }
+}
+
+.tasks__item {
+  background-color: $white;
+  box-shadow: $shadow;
+  border-left: 4px solid $color-grey-medium;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tasks__info {
+  display: flex;
+  align-items: center;
+
+  input {
+    all: unset;
+    width: 18px;
+    height: 18px;
+    border: 1px solid $color-grey-light;
+    border-radius: 4px;
+    display: inline-block;
+    position: relative;
+
+    &:checked {
+      &::after {
+        content: '\2713';
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: $color-grey-medium;
+      }
+    }
+  }
+
+  label {
+    margin-left: 0.5rem;
+    font-size: 1rem;
+    font-weight: 400;
+  }
+}
+
+.tasks__options {
+  display: flex;
+  align-items: center;
+
+  svg {
+    width: 20px;
+    height: 20px;
+    fill: $color-grey-medium;
+    margin-left: 0.5rem;
+    cursor: pointer;
+
+    &:first-child {
+      &:hover {
+        fill: $color-primary;
+      }
+    }
+
+    &:last-child {
+      &:hover {
+        fill: $color-option-1;
+      }
+    }
+  }
+}
+
+.tasks__done {
+  .tasks__info {
+    label {
+      color: $color-grey-medium;
+    }
+  }
+
+  .tasks__options {
+    svg {
+      &:first-child {
+        display: none;
+      }
+    }
+  }
+}
+
+.tasks__add {
+  padding: 0;
+  margin-top: 1.5rem;
+  margin-left: auto;
+  background-color: $color-secondary;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: $shadow;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-secondary-light;
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+    fill: $white;
+  }
+}

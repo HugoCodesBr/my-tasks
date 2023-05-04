@@ -1,0 +1,163 @@
+@import './mixins';
+@import './variables';
+
+.task-create {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 300;
+
+  &.active {
+    display: flex;
+
+    .create__card {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
+
+.create__bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(black, 0.5);
+  z-index: 301;
+}
+
+.create__card {
+  background-color: $white;
+  border-radius: $border-radius;
+  box-shadow: $shadow;
+  width: 90%;
+  max-width: 600px;
+  padding: 1.5rem;
+  color: $color-dark;
+  visibility: hidden;
+  opacity: 0;
+  position: relative;
+  z-index: 302;
+
+  h2 {
+    font-size: 2.25rem;
+    font-weight: 400;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid $color-grey-light;
+  }
+}
+
+.create__content {
+  label {
+    margin-top: 1.5rem;
+    display: block;
+    font-family: $font-primary;
+    font-weight: 400;
+    font-size: 1.125rem;
+  }
+
+  input[type='text'] {
+    width: 100%;
+    margin-top: 0.5rem;
+    border: 1px solid $color-grey-light;
+    border-radius: 4px;
+    outline: 2px solid transparent;
+    padding: 0.5rem;
+
+    &:focus {
+      outline-color: $color-primary;
+    }
+  }
+}
+
+.create__colors {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+
+  input[type='radio'] {
+    display: none;
+  }
+
+  label {
+    display: block;
+    margin-top: 0;
+    margin-right: 0.5rem;
+    cursor: pointer;
+  }
+
+  input + label::before {
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    background-color: $color-grey-medium;
+    outline: 2px solid transparent;
+  }
+
+  input[type='radio']:checked + label:before {
+    outline-color: $color-secondary;
+  }
+}
+
+.create__buttons {
+  display: flex;
+  align-items: center;
+  margin-top: 1.5rem;
+  margin-left: auto;
+  width: max-content;
+}
+
+.create__confirm {
+  width: 60px;
+  height: 60px;
+  background-color: $color-primary;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  box-shadow: $shadow;
+  margin-left: 1rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-primary-light;
+  }
+
+  svg {
+    fill: $white;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.create__cancel {
+  width: 34px;
+  height: 34px;
+  background-color: $color-secondary;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: $shadow;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-secondary-light;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+    fill: $white;
+  }
+}
