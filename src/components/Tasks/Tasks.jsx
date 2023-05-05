@@ -9,25 +9,24 @@ const Tasks = () => {
   const storedList = JSON.parse(window.localStorage.getItem('taskList'));
   const [taskData, setTaskData] = useState({
     task: '',
-    color: 'default',
+    color: '',
     id: '',
     done: false,
   });
   const [taskList, setTaskList] = useState(storedList || []);
   const [edit, setEdit] = useState(false);
   const [currentId, setCurrentId] = useState('');
-  const [currentTask, setCurrentTask] = useState('');
 
   function handleModal(id) {
     setModal(!modal);
-    setTaskData({ ...taskData, task: '' });
+    setTaskData({ ...taskData, task: '', color: '' });
     if (id !== 'task-add') {
       setEdit(true);
       setCurrentId(id);
       const copyTask = taskList
         .filter((task) => task.id === id)
         .map((task) => task.task);
-      setCurrentTask(copyTask);
+      setTaskData({ ...taskData, task: copyTask });
     } else {
       setEdit(false);
     }
@@ -48,9 +47,9 @@ const Tasks = () => {
 
   function handleSubmit(event, id) {
     event.preventDefault();
-    if (id !== '') {
+    if (id) {
       const updateTasks = taskList.map((task) => {
-        if (task.id === id) {
+        if (task.id === id && task.task !== taskData.task) {
           return { ...task, task: taskData.task, color: taskData.color };
         }
         return task;
@@ -143,7 +142,6 @@ const Tasks = () => {
         handleSubmit={handleSubmit}
         edit={edit}
         currentId={currentId}
-        currentTask={currentTask}
       />
     </>
   );

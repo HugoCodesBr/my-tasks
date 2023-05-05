@@ -105,6 +105,22 @@
   input[type='radio']:checked + label:before {
     outline-color: $color-secondary;
   }
+
+  #color1 + label::before {
+    background-color: $color-primary;
+  }
+
+  #color2 + label::before {
+    background-color: $color-option-2;
+  }
+
+  #color3 + label::before {
+    background-color: $color-option-3;
+  }
+
+  #color4 + label::before {
+    background-color: $color-option-4;
+  }
 }
 
 .create__buttons {
