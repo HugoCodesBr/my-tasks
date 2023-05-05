@@ -1,0 +1,16 @@
+@import './mixins';
+@import './variables';
+
+.footer__logo {
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
