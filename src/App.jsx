@@ -4,6 +4,7 @@ import './styles/main.scss';
 import './styles/Dark.scss';
 import Home from './components/Home';
 import Header from './components/Header';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 function App() {
@@ -21,10 +22,14 @@ function App() {
 
   return (
     <div className={`App ${themeChanger ? 'dark' : ''}`}>
-      <Header themeDarkHandle={themeDarkHandle} themeChanger={themeChanger} />
-      <main className="AppBody">
-        <Home />
-      </main>
+      <BrowserRouter>
+        <Header themeDarkHandle={themeDarkHandle} themeChanger={themeChanger} />
+        <main className="AppBody">
+          <Routes>
+            <Route path="*" element={<Home />} />
+          </Routes>
+        </main>
+      </BrowserRouter>
     </div>
   );
 }
