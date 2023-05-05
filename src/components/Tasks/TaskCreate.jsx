@@ -9,12 +9,17 @@ const TaskCreate = ({
   taskChange,
   colorChange,
   handleSubmit,
+  edit,
+  currentId,
 }) => {
   return (
     <div className={`task-create ${modal ? 'active' : ''}`}>
       <div className="create__bg" onClick={handleModal}></div>
-      <form onSubmit={handleSubmit} className="create__card">
-        <h2>Criar tarefa</h2>
+      <form
+        onSubmit={(event) => handleSubmit(event, currentId)}
+        className="create__card"
+      >
+        {edit ? <h2>Editar tarefa</h2> : <h2>Criar tarefa</h2>}
         <div className="create__content">
           <label htmlFor="task">Descreva a tarefa:</label>
           <input
