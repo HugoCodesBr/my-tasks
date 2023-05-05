@@ -15,4 +15,32 @@
       }
     }
   }
+
+  .tasks {
+    background-color: $color-secondary;
+    color: $white;
+  }
+
+  .tasks__item {
+    background-color: $color-secondary;
+  }
+
+  .tasks__add {
+    background-color: $color-secondary-dark;
+
+    &:hover {
+      background-color: $color-secondary;
+    }
+  }
+
+  .create__card {
+    background-color: $color-secondary;
+    color: $white;
+  }
+
+  .create__colors {
+    input[type='radio']:checked + label:before {
+      outline-color: $white;
+    }
+  }
 }

@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 const Tasks = () => {
   const [modal, setModal] = useState(false);
   const storedList = JSON.parse(window.localStorage.getItem('taskList'));
+  const storedDone = JSON.parse(window.localStorage.getItem('doneList'));
   const [taskData, setTaskData] = useState({
     task: '',
     color: '',
@@ -16,16 +17,23 @@ const Tasks = () => {
   const [taskList, setTaskList] = useState(storedList || []);
   const [edit, setEdit] = useState(false);
   const [currentId, setCurrentId] = useState('');
+  const [doneList, setDoneList] = useState(storedDone || []);
 
   function handleModal(id) {
+    const colorsInputs = document.querySelectorAll('.create__colors input');
+    colorsInputs.forEach((radio) => {
+      radio.checked = false;
+    });
     setModal(!modal);
     setTaskData({ ...taskData, task: '', color: '' });
+
     if (id !== 'task-add') {
-      setEdit(true);
-      setCurrentId(id);
       const copyTask = taskList
         .filter((task) => task.id === id)
         .map((task) => task.task);
+
+      setEdit(true);
+      setCurrentId(id);
       setTaskData({ ...taskData, task: copyTask });
     } else {
       setEdit(false);
@@ -42,7 +50,9 @@ const Tasks = () => {
 
   function removeTask(id) {
     const newList = taskList.filter((task) => task.id !== id);
+    const newDoneList = doneList.filter((task) => task.id !== id);
     setTaskList(newList);
+    setDoneList(newDoneList);
   }
 
   function handleSubmit(event, id) {
@@ -61,6 +71,36 @@ const Tasks = () => {
     handleModal();
   }
 
+  function handleDone(event, id) {
+    taskList.map((task) => {
+      if (task.id === id && event.target.checked) {
+        task.done = true;
+        setDoneList([task, ...doneList]);
+      } else if (task.id === id && event.target.checked === false) {
+        task.done = false;
+        setDoneList([task, ...doneList]);
+      }
+    });
+    const newList = taskList.filter((task) => task.done !== true);
+    setTaskList(newList);
+  }
+
+  function handleUndone(event, id) {
+    const undoneItem = doneList.filter((task) => task.id === event.target.id);
+    const newDoneList = doneList.filter((task) => task.id !== event.target.id);
+    doneList.map((task) => {
+      if (task.id === id && event.target.checked) {
+        task.done = true;
+        setDoneList([task, ...doneList]);
+      } else if (task.id === id && event.target.checked === false) {
+        task.done = false;
+        setDoneList([task, ...doneList]);
+      }
+    });
+    setTaskList([undoneItem[0], ...taskList]);
+    setDoneList(newDoneList);
+  }
+
   useEffect(() => {
     const newId = uuidv4();
     setTaskData({
@@ -68,7 +108,8 @@ const Tasks = () => {
       id: newId,
     });
     window.localStorage.setItem('taskList', JSON.stringify(taskList));
-  }, [taskList]);
+    window.localStorage.setItem('doneList', JSON.stringify(doneList));
+  }, [taskList, doneList]);
 
   return (
     <>
@@ -76,13 +117,21 @@ const Tasks = () => {
         <h2>Minhas Tarefas</h2>
         <div className="tasks__content">
           <div className="tasks__todo">
-            <h3>Incompletas</h3>
+            <h3>A Fazer</h3>
             <ul>
               {taskList.length > 0 ? (
                 taskList.map((item) => (
-                  <li key={item.task} className={`tasks__item ${item.color}`}>
+                  <li
+                    key={'undone' + item.task}
+                    className={`tasks__item ${item.color}`}
+                  >
                     <div className="tasks__info">
-                      <input type="checkbox" name={item.id} id={item.id} />
+                      <input
+                        type="checkbox"
+                        name={item.id}
+                        id={item.id}
+                        onChange={(event) => handleDone(event, item.id)}
+                      />
                       <label htmlFor={item.id}>{item.task}</label>
                     </div>
                     <div className="tasks__options">
@@ -99,28 +148,33 @@ const Tasks = () => {
             </ul>
           </div>
           <div className="tasks__done">
-            <h3>Completas</h3>
+            <h3>Concluídas</h3>
             <ul>
-              <li className="tasks__item color-1">
-                <div className="tasks__info">
-                  <input type="checkbox" name="option4" id="option4" />
-                  <label htmlFor="option4">Essa é uma tarefa</label>
-                </div>
-                <div className="tasks__options">
-                  <AiOutlineEdit />
-                  <AiOutlineDelete />
-                </div>
-              </li>
-              <li className="tasks__item color-1">
-                <div className="tasks__info">
-                  <input type="checkbox" name="option5" id="option5" />
-                  <label htmlFor="option5">Essa é uma tarefa</label>
-                </div>
-                <div className="tasks__options">
-                  <AiOutlineEdit />
-                  <AiOutlineDelete />
-                </div>
-              </li>
+              {doneList.length > 0 ? (
+                doneList.map((item) => (
+                  <li
+                    key={'done' + item.task}
+                    className={`tasks__item ${item.color}`}
+                  >
+                    <div className="tasks__info">
+                      <input
+                        type="checkbox"
+                        name={item.id}
+                        id={item.id}
+                        checked
+                        onChange={(event) => handleUndone(event, item.id)}
+                      />
+                      <label htmlFor={item.id}>{item.task}</label>
+                    </div>
+                    <div className="tasks__options">
+                      <AiOutlineEdit onClick={() => handleModal(item.id)} />
+                      <AiOutlineDelete onClick={() => removeTask(item.id)} />
+                    </div>
+                  </li>
+                ))
+              ) : (
+                <p className="tasks__empty">Nenhuma tarefa concluída.</p>
+              )}
             </ul>
           </div>
         </div>

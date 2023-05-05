@@ -12,10 +12,6 @@ body {
 .App {
   display: flex;
   flex-direction: column;
-
-  * {
-    transition: 200ms;
-  }
 }
 
 .AppBody {

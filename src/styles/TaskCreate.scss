@@ -100,6 +100,7 @@
     border-radius: 4px;
     background-color: $color-grey-medium;
     outline: 2px solid transparent;
+    transition: 200ms;
   }
 
   input[type='radio']:checked + label:before {
@@ -143,6 +144,7 @@
   box-shadow: $shadow;
   margin-left: 1rem;
   cursor: pointer;
+  transition: 200ms;
 
   &:hover {
     background-color: $color-primary-light;
@@ -166,6 +168,7 @@
   justify-content: center;
   box-shadow: $shadow;
   cursor: pointer;
+  transition: 200ms;
 
   &:hover {
     background-color: $color-secondary-light;

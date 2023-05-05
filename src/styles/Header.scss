@@ -5,6 +5,7 @@
   padding: 1.5rem;
   box-shadow: $shadow;
   background-color: $white;
+  transition: 200ms;
 
   @include screen(desktop) {
     position: fixed;

@@ -10,6 +10,7 @@
   border-radius: $border-radius;
   box-shadow: $shadow;
   color: $color-dark;
+  transition: 200ms;
 
   h2 {
     font-weight: 400;
@@ -43,6 +44,23 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: 200ms;
+
+  &.color1 {
+    border-color: $color-primary;
+  }
+
+  &.color2 {
+    border-color: $color-option-2;
+  }
+
+  &.color3 {
+    border-color: $color-option-3;
+  }
+
+  &.color4 {
+    border-color: $color-option-4;
+  }
 }
 
 .tasks__info {
@@ -57,6 +75,7 @@
     border-radius: 4px;
     display: inline-block;
     position: relative;
+    transition: 200ms;
 
     &:checked {
       &::after {
@@ -88,6 +107,7 @@
     fill: $color-grey-medium;
     margin-left: 0.5rem;
     cursor: pointer;
+    transition: 200ms;
 
     &:first-child {
       &:hover {
@@ -139,6 +159,7 @@
   justify-content: center;
   box-shadow: $shadow;
   cursor: pointer;
+  transition: 200ms;
 
   &:hover {
     background-color: $color-secondary-light;
