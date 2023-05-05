@@ -16,6 +16,7 @@ const Tasks = () => {
   const [taskList, setTaskList] = useState(storedList || []);
   const [edit, setEdit] = useState(false);
   const [currentId, setCurrentId] = useState('');
+  const [currentTask, setCurrentTask] = useState('');
 
   function handleModal(id) {
     setModal(!modal);
@@ -23,6 +24,10 @@ const Tasks = () => {
     if (id !== 'task-add') {
       setEdit(true);
       setCurrentId(id);
+      const copyTask = taskList
+        .filter((task) => task.id === id)
+        .map((task) => task.task);
+      setCurrentTask(copyTask);
     } else {
       setEdit(false);
     }
@@ -138,6 +143,7 @@ const Tasks = () => {
         handleSubmit={handleSubmit}
         edit={edit}
         currentId={currentId}
+        currentTask={currentTask}
       />
     </>
   );

@@ -11,6 +11,7 @@ const TaskCreate = ({
   handleSubmit,
   edit,
   currentId,
+  currentTask,
 }) => {
   return (
     <div className={`task-create ${modal ? 'active' : ''}`}>
@@ -26,7 +27,7 @@ const TaskCreate = ({
             type="text"
             name="task"
             id="task"
-            value={taskData.task}
+            value={edit ? currentTask : taskData.task}
             onChange={taskChange}
           />
           <label htmlFor="color">Escolha uma cor (opcional)</label>
